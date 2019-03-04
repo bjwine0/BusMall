@@ -1,0 +1,9 @@
+main {
+  display: inline-block;
+  margin: 960 auto;
+}
+
+img {
+  width: 400px;
+  height: 400px;
+}
