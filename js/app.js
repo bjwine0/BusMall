@@ -15,6 +15,7 @@ function BusMall(name, ext) {
   this.click = 0;
   this.views = 0;
   allProducts.push(this);
+
   console.log(allProducts);
 }
 
@@ -117,15 +118,19 @@ function Number(title, identifier) {
   this.votes = 0;
 
   a.push(this);
+
 }
+
 new Number ('fake', 'goo');
 new Number ('trio', 'pizza');
+
 
 
 function showSong () {
   var songlist = document.getElementById('list');
 
   songlist.innerHTML = '';
+
 
   for (var i = 0; i < a.length; i++) {
     var listElem = document.createElement('li');

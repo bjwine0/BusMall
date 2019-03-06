@@ -1,13 +1,14 @@
+
 body {
   background-color: rgb(96, 126, 226);
   text-align: center;
 }
-
+  
 main {
   text-align: center;
   display: inline-block;
   margin: 960 auto;
-}
+} 
 
 img {
   width: 400px;
