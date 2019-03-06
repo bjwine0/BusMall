@@ -1,9 +1,36 @@
-/* main {
+
+body {
+  background-color: rgb(96, 126, 226);
+  text-align: center;
+}
+  
+main {
+  text-align: center;
   display: inline-block;
   margin: 960 auto;
-} */
+} 
 
 img {
   width: 400px;
   height: 400px;
+  margin-right: 35px;
+  border: 8px solid black;
+  
 }
+
+h1 {
+  font-family: 'Roboto Slab', serif;
+  color: white;
+  font-size: 50px;
+}
+
+p {
+  color: aliceblue;
+  font-size: 20px;
+}
+
+#number-of-clicks {
+  list-style-type: none;
+  font-size: 20px;
+}
+

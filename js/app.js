@@ -1,105 +1,3 @@
-// 'use strict';
-
-// var nameArray = [];
-// var allProducts = [];
-// var viewedImage =[];
-// var clickCount = 0;
-// var picsArray = [document.getElementById('random1'), document.getElementById('random2'), document.getElementById('random3')];
-// var section = document.getElementById('sec');
-
-// function ProductPics(name, ext ) {
-
-//   this.filepath = `img/${name}.${ext}`;
-//   this.name = name;
-//   this.ext = ext;
-//   this.views = 0;
-//   this.clicks = 0;
-  
-//   nameArray.push(this.name);
-//   allProducts.push(this);
-// }
-
-// new ProductPics('bag', 'jpg');
-// new ProductPics('banana', 'jpg');
-// new ProductPics('bathroom', 'jpg');
-// new ProductPics('boots', 'jpg');
-// new ProductPics('breakfast', 'jpg');
-// new ProductPics('bubblegum', 'jpg');
-// new ProductPics('chair', 'jpg');
-// new ProductPics('cthulhu', 'jpg');
-// new ProductPics('dog-duck', 'jpg');
-// new ProductPics('dragon', 'jpg');
-// new ProductPics('pet-sweep', 'jpg');
-// new ProductPics('pen', 'jpg');
-// new ProductPics('scissors', 'jpg');
-// new ProductPics('shark', 'jpg');
-// new ProductPics('sweep', 'png');
-// new ProductPics('tauntaun', 'jpg');
-// new ProductPics('unicorn', 'jpg');
-// new ProductPics('usb', 'gif');
-// new ProductPics('water-can', 'jpg');
-// new ProductPics('wine-glass', 'jpg');
-
-
-
-// function showRandomProduct() { 
-//   return Math.floor(Math.random() * allProducts.length);
-// }
-
-
-// function displayProduct() {
-//   var currentImage = [];
-//   currentImage[0] = showRandomProduct();
-//   while (viewedImage.indexOf(currentImage[0]) !== -1) {
-//     currentImage[0] = showRandomProduct();
-//   }
-//   currentImage[1] = showRandomProduct();
-//   while(currentImage[0] === currentImage[1] || viewedImage.indexOf(currentImage[1]) !== -1) {
-//     currentImage[1] = showRandomProduct();
-//   }
-//   currentImage[2] = showRandomProduct();
-//   while(currentImage[0] === currentImage[2] || currentImage[1] === currentImage[2] || viewedImage.indexOf(currentImage[2]) !== -1) {
-//     currentImage[2] = showRandomProduct();
-//   }
-//   for(var i = 0; i < 3; i++) {
-//     picsArray[i].src = allProducts[currentImage[i]].path;
-//     picsArray[i].id = allProducts[currentImage[i]].name;
-//     allProducts[currentImage[i]].views += 1;
-//     viewedImage[i] = currentImage[i];
-//   }
-// }
-
-
-// function handleClick(event) {
-//   console.log(clickCount, 'total clicks');
-//   if(clickCount >= 24) {
-//     section.removeEventListener('click', handleClick);
-//     clicks();
-//   }
-//   if (event.target.id === 'images') {
-//     return alert('Please click on a image!');
-//   }
-//   clickCount += 1;
-//   for(var i = 0; i < allProducts.length; i++) {
-//     if(event.target.id === allProducts[i].name) {
-//       allProducts[i].clicks += 1;
-//       console.log(`${event.target.id} has ${allProducts[i].clicks} votes and ${allProducts[i].views} views`);
-//     }
-//   }
-//   displayProduct();
-// }
-
-// function clicks() {
-//   for(var i = 0; i < allProducts.length; i++) {
-//     var liEl = document.createElement('li');
-//     liEl.textContent = `${allProducts[i].name}: ${allProducts[i].clicks} votes, ${allProducts[i].views} views.`;
-//     // numberOfClicks.appendChild(liEl);
-//   }
-// }
-
-// section.addEventListener('click', handleClick);
-// displayProduct();
-
 'use strict';
 
 
@@ -117,6 +15,8 @@ function BusMall(name, ext) {
   this.click = 0;
   this.views = 0;
   allProducts.push(this);
+
+  console.log(allProducts);
 }
 
 new BusMall('bag', 'jpg');
@@ -150,20 +50,30 @@ function displayProduct() {
   while (viewedImage.indexOf(currentImage[0]) !== -1) {
     currentImage[0] = showRandomProduct();
   }
+  console.log(viewedImage.indexOf(currentImage[0]));
+  console.log(currentImage);
+  console.log(viewedImage);
   currentImage[1] = showRandomProduct();
   while(currentImage[0] === currentImage[1] || viewedImage.indexOf(currentImage[1]) !== -1) {
     currentImage[1] = showRandomProduct();
   }
+  console.log(viewedImage.indexOf(currentImage[1]));
+  console.log(currentImage);
+  console.log(viewedImage);
   currentImage[2] = showRandomProduct();
   while(currentImage[0] === currentImage[2] || currentImage[1] === currentImage[2] || viewedImage.indexOf(currentImage[2]) !== -1) {
     currentImage[2] = showRandomProduct();
   }
+  console.log(viewedImage.indexOf(currentImage[2]));
+  console.log(currentImage);
+  console.log(viewedImage);
   for(var i = 0; i < 3; i++) {
     imgElement[i].src = allProducts[currentImage[i]].path;
     imgElement[i].id = allProducts[currentImage[i]].name;
     allProducts[currentImage[i]].views += 1;
     viewedImage[i] = currentImage[i];
   }
+  console.log(viewedImage);
 }
 
 function handleClick(event) {
@@ -173,13 +83,23 @@ function handleClick(event) {
     clicks();
   }
   totalClicks += 1;
+  
   for(var i = 0; i < allProducts.length; i++) {
     if(event.target.id === allProducts[i].name) {
       allProducts[i].click += 1;
       console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
+      console.log(allProducts);
     }
   }
   displayProduct();
+}
+
+function clicks() {
+  for(var i = 0; i < allProducts.length; i++) {
+    var liElem = document.createElement('li');
+    liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views.`;
+    numberOfClicks.appendChild(liElem);
+  }
 }
 
 sectionTag.addEventListener('click', handleClick);
@@ -188,6 +108,52 @@ displayProduct();
 
 
 
+var a = [];
+var b;
+var c = false;
+
+function Number(title, identifier) {
+  this.title = title;
+  this.identifier = identifier;
+  this.votes = 0;
+
+  a.push(this);
+
+}
+
+new Number ('fake', 'goo');
+new Number ('trio', 'pizza');
+
+
+
+function showSong () {
+  var songlist = document.getElementById('list');
+
+  songlist.innerHTML = '';
+
+
+  for (var i = 0; i < a.length; i++) {
+    var listElem = document.createElement('li');
+    listElem.textContent = a[i].title + ', ' + a[i].votes + ' votes';
+    songlist.appendChild(listElem);
+  }
+
+}
+function tally(thisNumber) {
+  for ( var i = 0; i < a.length; i++) {
+    if (thisNumber === a[i].identifier) {
+      a[i].votes++;
+    }
+  }
+}
+
+document.getElementById('voting').addEventListener('click', function(event) {
+  tally(event.target.id);
+});
+
+document.getElementById('but-list').addEventListener('click', function() {
+  showSong(event.target.id);
+});
 
 
 
