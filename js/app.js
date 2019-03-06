@@ -15,7 +15,6 @@ function BusMall(name, ext) {
   this.click = 0;
   this.views = 0;
   allProducts.push(this);
-
   console.log(allProducts);
 }
 
@@ -108,52 +107,48 @@ displayProduct();
 
 
 
-var a = [];
-var b;
-var c = false;
+// var a = [];
+// var b;
+// var c = false;
 
-function Number(title, identifier) {
-  this.title = title;
-  this.identifier = identifier;
-  this.votes = 0;
+// function Number(title, identifier) {
+//   this.title = title;
+//   this.identifier = identifier;
+//   this.votes = 0;
 
-  a.push(this);
-
-}
-
-new Number ('fake', 'goo');
-new Number ('trio', 'pizza');
+//   a.push(this);
+// }
+// new Number ('fake', 'goo');
+// new Number ('trio', 'pizza');
 
 
+// function showSong () {
+//   var songlist = document.getElementById('list');
 
-function showSong () {
-  var songlist = document.getElementById('list');
+//   songlist.innerHTML = '';
 
-  songlist.innerHTML = '';
+//   for (var i = 0; i < a.length; i++) {
+//     var listElem = document.createElement('li');
+//     listElem.textContent = a[i].title + ', ' + a[i].votes + ' votes';
+//     songlist.appendChild(listElem);
+//   }
 
+// }
+// function tally(thisNumber) {
+//   for ( var i = 0; i < a.length; i++) {
+//     if (thisNumber === a[i].identifier) {
+//       a[i].votes++;
+//     }
+//   }
+// }
 
-  for (var i = 0; i < a.length; i++) {
-    var listElem = document.createElement('li');
-    listElem.textContent = a[i].title + ', ' + a[i].votes + ' votes';
-    songlist.appendChild(listElem);
-  }
+// document.getElementById('voting').addEventListener('click', function(event) {
+//   tally(event.target.id);
+// });
 
-}
-function tally(thisNumber) {
-  for ( var i = 0; i < a.length; i++) {
-    if (thisNumber === a[i].identifier) {
-      a[i].votes++;
-    }
-  }
-}
-
-document.getElementById('voting').addEventListener('click', function(event) {
-  tally(event.target.id);
-});
-
-document.getElementById('but-list').addEventListener('click', function() {
-  showSong(event.target.id);
-});
+// document.getElementById('but-list').addEventListener('click', function() {
+//   showSong(event.target.id);
+// });
 
 
 
