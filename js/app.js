@@ -96,7 +96,7 @@ function handleClick(event) {
 function clicks() {
   for(var i = 0; i < allProducts.length; i++) {
     var liElem = document.createElement('li');
-    liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views.`;
+    liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views, ${(((allProducts[i].click / allProducts[i].views) * 100).toFixed(2))}%`;
     numberOfClicks.appendChild(liElem);
   }
 }
