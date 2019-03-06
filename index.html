@@ -2,47 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Product Survey</title>
   <link rel="stylesheet" href="css/style.css">
+  <title>Bus Mall Survey</title>
+  <script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js></script>
+  
 </head>
-
 <body>
-  <header>
-    A page with 20 products that randomly select 3 and display those three
-  </header>
+    <h1>Bus Mall</h1>
+    <p>Click the product you are most likely to buy?</p>
+    <p>This is a survey of 25 selections, It will only take a minute.  Thank You for participating!</p>
+    
+    <section id="images">
+      <img id="one" src="">
+      <img id="two" src="">
+      <img id="three" src="">
+    </section>
+    
+    <div>
+      <table id="table"></table>
+    </div>
+    <ul id="number-of-clicks"></ul>
 
-  <main>
-    <h1>Click on the product that you are most likely to purchase.</h1>
+    <section id="voting">
+      <button id="1">1</button>
+      <button id="2">2</button>
+      <button id="3">3</button>
+      <button id="4">4</button>
+      <button id="5">5</button>
 
-    <section>
-      <img id="productpics" src="" alt="" title="">
-      <!-- <img id="bag" src="img/bag.jpg" alt="bag" title="">
-      <img id="banana" src="img/banana.jpg" alt="banana" title="">
-      <img id="bathroom" src="img/bathroom.jpg" alt="bathroom" title="">
-      <img id="boots"src="img/boots.jpg" alt="boots" title="">
-      <img id="breakfast" src="img/breakfast.jpg" alt="breakfast" title="">
-      <img id="bubblegum" src="img/bubblegum.jpg" alt="bubblegum" title="">
-      <img id="chair" src="img/chair.jpg" alt="chair" title="">
-      <img id="cthulhu"src="img/cthulhu.jpg" alt="cthulhu" title="">
-      <img id="dog-duck" src="img/dog-duck.jpg" alt="dog-duck" title="">
-      <img id="dragon"src="img/dragon.jpg" alt="dragon" title="">
-      <img id="pen"src="img/pen.jpg" alt="pen" title="">
-      <img id="pet-sweep" src="img/pet-sweep.jpg" alt="pet-sweep" title="">
-      <img id="scissors" src="img/scissors.jpg" alt="scissors" title="">
-      <img id="shark" src="img/shark.jpg" alt="shark" title="">
-      <img id="sweep" src="img/sweep.png" alt="sweep" title="">
-      <img id="tauntaun"src="img/tauntaun.jpg" alt="taunt" title="">
-      <img id="unicorn" src="img/unicorn.jpg" alt="unicorn" title="">
-      <img id="usb" src="img/usb.gif" alt="usb" title="">
-      <img id="water-can" src="img/water-can.jpg" alt="water" title="">
-      <img id="wine-glass" src="img/wine-glass.jpg" alt="wine" title=""> -->
+      <button id="but-list">list</button>
+      <button id="draw">chart</button>
 
     </section>
-   
 
-  </main>
-  
-
+    <section>
+      <ul id="list"></ul>
+    </section>
   <script src="js/app.js"></script>
 </body>
+
 </html>
