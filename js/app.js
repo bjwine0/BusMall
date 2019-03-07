@@ -17,8 +17,7 @@ function BusMall(name, ext) {
   this.views = 0;
   allProducts.push(this);
   titles.push(this.name);
-  console.log(allProducts);
-  console.log(this.click);
+  
 }
 
 new BusMall('bag', 'jpg');
@@ -79,7 +78,7 @@ function displayProduct() {
 }
 
 function handleClick(event) {
-  console.log(totalClicks, 'total clicks');
+  // console.log(totalClicks, 'total clicks');
   if(totalClicks >= 24) {
     sectionTag.removeEventListener('click', handleClick);
     clicks();
@@ -90,7 +89,6 @@ function handleClick(event) {
   for(var i = 0; i < allProducts.length; i++) {
     if(event.target.id === allProducts[i].name) {
       allProducts[i].click += 1;
-      gotClicks.push(allProducts[i].click);
       console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
       // console.log(allProducts);
       console.log(gotClicks);
@@ -115,16 +113,17 @@ var ctx = document.getElementById('myChart').getContext('2d');
 
 var gotClicks = [];
 
-// function getViews () {
-//   for (var i = 0; i < allProducts.length; i++) {
-//     gotViews[i]= allProducts[i];
-//   }
-//   console.log(gotViews);
-// }
+function getViews () {
+  for (var i = 0; i < titles.length; i++) {
+    
+    gotClicks[i] = allProducts[i].click;
+  }
+  console.log(gotClicks);
+}
 
 
 function showChart () {
-
+  getViews ();
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
