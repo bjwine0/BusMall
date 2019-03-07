@@ -1,5 +1,6 @@
 
 body {
+  margin: 0 auto;
   background-color: rgb(96, 126, 226);
   text-align: center;
 }
@@ -29,13 +30,19 @@ p {
   font-size: 20px;
 }
 
+#counter {
+  
+}
+
 #number-of-clicks {
   list-style-type: none;
   font-size: 20px;
 }
 
 canvas {
-  width: 1200px !important;
+  margin: 0 auto;
+  text-align: center !important;
+  width: 1500px !important;
   height: 800px !important;
 }
 

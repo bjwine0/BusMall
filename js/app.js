@@ -8,6 +8,9 @@ var imgElement = [document.getElementById('one'), document.getElementById('two')
 var numberOfClicks = document.getElementById('number-of-clicks');
 var totalClicks = 0;
 var titles = [];
+var counter = document.getElementById('counter');
+var bye = document.getElementById('bye');
+
 
 function BusMall(name, ext) {
   this.name = name;
@@ -81,11 +84,12 @@ function handleClick(event) {
   // console.log(totalClicks, 'total clicks');
   if(totalClicks >= 24) {
     sectionTag.removeEventListener('click', handleClick);
+    bye.remove();
     clicks();
     showChart();
   }
   totalClicks += 1;
-  
+  counter.textContent = `You have voted ${totalClicks} times.`;
   for(var i = 0; i < allProducts.length; i++) {
     if(event.target.id === allProducts[i].name) {
       allProducts[i].click += 1;
@@ -115,7 +119,6 @@ var gotClicks = [];
 
 function getViews () {
   for (var i = 0; i < titles.length; i++) {
-    
     gotClicks[i] = allProducts[i].click;
   }
   console.log(gotClicks);
@@ -132,29 +135,76 @@ function showChart () {
         label: '# of Votes',
         data: gotClicks,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black',
+          'black'
         ],
         borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white'
         ],
-        borderWidth: 1
+        borderWidth: 3
       }]
     },
     options: {
+      legend: {
+        labels: {
+          fontColor: 'white'
+        }
+      },
+      title: {
+        display: true,
+        fontColor: 'white',
+        text: 'Your Vote Results',
+        fontSize: 60
+      },
       scales: {
         yAxes: [{
           ticks: {
-            beginAtZero:true
+            beginAtZero: true,
+            fontSize: 20,
+            fontColor: 'Black'
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            fontSize: 30,
+            fontColor: 'Black'
           }
         }]
       }
@@ -162,49 +212,6 @@ function showChart () {
   });
 }
 
-
-// var a = [];
-// var b;
-// var c = false;
-
-// function Number(title, identifier) {
-//   this.title = title;
-//   this.identifier = identifier;
-//   this.votes = 0;
-
-//   a.push(this);
-// }
-// new Number ('fake', 'goo');
-// new Number ('trio', 'pizza');
-
-
-// function showSong () {
-//   var songlist = document.getElementById('list');
-
-//   songlist.innerHTML = '';
-
-//   for (var i = 0; i < a.length; i++) {
-//     var listElem = document.createElement('li');
-//     listElem.textContent = a[i].title + ', ' + a[i].votes + ' votes';
-//     songlist.appendChild(listElem);
-//   }
-
-// }
-// function tally(thisNumber) {
-//   for ( var i = 0; i < a.length; i++) {
-//     if (thisNumber === a[i].identifier) {
-//       a[i].votes++;
-//     }
-//   }
-// }
-
-// document.getElementById('voting').addEventListener('click', function(event) {
-//   tally(event.target.id);
-// });
-
-// document.getElementById('but-list').addEventListener('click', function() {
-//   showSong(event.target.id);
-// });
 
 
 
