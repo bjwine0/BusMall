@@ -203,7 +203,7 @@ function showChart () {
         }],
         xAxes: [{
           ticks: {
-            fontSize: 30,
+            fontSize: 20,
             fontColor: 'Black'
           }
         }]
