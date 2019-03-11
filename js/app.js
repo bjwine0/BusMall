@@ -76,8 +76,9 @@ function displayProduct() {
     imgElement[i].id = allProducts[currentImage[i]].name;
     allProducts[currentImage[i]].views += 1;
     viewedImage[i] = currentImage[i];
-    
+
   }
+  
   console.log('currentimage', currentImage);
   console.log('viewedimage', viewedImage);
 }
@@ -233,3 +234,17 @@ function checkLocalStorage () {
 
 //  displayProduct();
 checkLocalStorage();
+
+function bigImg(x) {
+  x.style.height = '500px';
+  x.style.width = '500px';
+}
+
+function normalImg(x) {
+  x.style.height = '400px';
+  x.style.width = '400px';
+}
+
+// function blur() {
+//   if (imgElement[0])
+// }

@@ -1,8 +1,10 @@
 
-body {
+html {
   margin: 0 auto;
-  background-color: rgb(96, 126, 226);
+  /* background-color: rgb(96, 126, 226); */
   text-align: center;
+  
+  background-image: linear-gradient(rgb(96, 126, 226), rgb(117, 148, 83)); 
 }
   
 main {
@@ -16,7 +18,8 @@ img {
   height: 400px;
   margin-right: 35px;
   border: 8px solid black;
-  
+  border-radius: 50%;
+  box-shadow: 30px 10px 5px rgb(53, 49, 49);
 }
 
 h1 {
@@ -41,5 +44,20 @@ canvas {
   text-align: center !important;
   width: 1500px !important;
   height: 700px !important;
+  margin-bottom: 200px;
 }
+
+img {
+  -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
+}
+ 
+img:hover {
+  border: 70px solid #000;
+  border-radius: 50%;
+}
+
 
