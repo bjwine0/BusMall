@@ -20,7 +20,7 @@ function BusMall(name, ext) {
   this.views = 0;
   allProducts.push(this);
   titles.push(this.name);
-  
+
 }
 
 new BusMall('bag', 'jpg');
@@ -77,56 +77,49 @@ function displayProduct() {
     allProducts[currentImage[i]].views += 1;
     viewedImage[i] = currentImage[i];
   }
-  console.log(viewedImage);
+  // console.log(viewedImage);
 }
+
+sectionTag.addEventListener('click', handleClick);
 
 function handleClick(event) {
   // console.log(totalClicks, 'total clicks');
   if(totalClicks >= 24) {
     sectionTag.removeEventListener('click', handleClick);
     bye.remove();
-    clicks();
-    showChart();
+    showClicks();
+    // showChart();
+    checkLocalStorage();
   }
   totalClicks += 1;
   counter.textContent = `You have voted ${totalClicks} times.`;
   for(var i = 0; i < allProducts.length; i++) {
     if(event.target.id === allProducts[i].name) {
       allProducts[i].click += 1;
-      console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
-      // console.log(allProducts);
-      console.log(gotClicks);
+      // console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
+      // // console.log(allProducts);
+      // console.log(gotClicks);
     }
   }
   displayProduct();
 }
 
-function clicks() {
+function showClicks() {
   for(var i = 0; i < allProducts.length; i++) {
     var liElem = document.createElement('li');
     liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views, ${(((allProducts[i].click / allProducts[i].views) * 100).toFixed(2))}%`;
     numberOfClicks.appendChild(liElem);
+    gotClicks[i] = allProducts[i].click;
+    localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
   }
 }
-
-sectionTag.addEventListener('click', handleClick);
-displayProduct();
+var gotClicks = [];
 
 
 var ctx = document.getElementById('myChart').getContext('2d');
 
-var gotClicks = [];
-
-function getViews () {
-  for (var i = 0; i < titles.length; i++) {
-    gotClicks[i] = allProducts[i].click;
-  }
-  console.log(gotClicks);
-}
-
-
 function showChart () {
-  getViews ();
+
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -134,50 +127,8 @@ function showChart () {
       datasets: [{
         label: '# of Votes',
         data: gotClicks,
-        backgroundColor: [
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black'
-        ],
-        borderColor: [
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white',
-          'white'
-        ],
+        backgroundColor: 'black',
+        borderColor: 'white',
         borderWidth: 3
       }]
     },
@@ -212,6 +163,17 @@ function showChart () {
   });
 }
 
-
-
+function checkLocalStorage () {
+  if (gotClicks.length > 0) {
+    var retrieve = localStorage.getItem('gotClicks');
+    gotClicks = JSON.parse(retrieve);
+    
+    showChart();
+  }else {
+    displayProduct();
+  }
+  console.log('gotClicks', gotClicks);
+}
+// checkLocalStorage();
+ displayProduct();
 
