@@ -11,7 +11,7 @@ var titles = [];
 var counter = document.getElementById('counter');
 var bye = document.getElementById('bye');
 
-
+// debugger;
 function BusMall(name, ext) {
   this.name = name;
   this.path = `img/${name}.${ext}`;
@@ -76,104 +76,122 @@ function displayProduct() {
     imgElement[i].id = allProducts[currentImage[i]].name;
     allProducts[currentImage[i]].views += 1;
     viewedImage[i] = currentImage[i];
+    
   }
-  // console.log(viewedImage);
+  console.log('currentimage', currentImage);
+  console.log('viewedimage', viewedImage);
 }
+// displayProduct();
+
 
 sectionTag.addEventListener('click', handleClick);
 
 function handleClick(event) {
+  // debugger;
   // console.log(totalClicks, 'total clicks');
   if(totalClicks >= 24) {
     sectionTag.removeEventListener('click', handleClick);
     bye.remove();
     showClicks();
-    // showChart();
-    checkLocalStorage();
+    showChart();
+    // checkLocalStorage();
   }
-  totalClicks += 1;
+  totalClicks ++;
+  console.log('totalclicks', totalClicks);
   counter.textContent = `You have voted ${totalClicks} times.`;
   for(var i = 0; i < allProducts.length; i++) {
     if(event.target.id === allProducts[i].name) {
       allProducts[i].click += 1;
-      // console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
-      // // console.log(allProducts);
-      // console.log(gotClicks);
+      console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
     }
   }
+  // console.log('allproducts', allProducts);
   displayProduct();
 }
 
 function showClicks() {
   for(var i = 0; i < allProducts.length; i++) {
+    if(event.target.id === allProducts[i].name) {
+      allProducts[i].click += 1;
+    }
+
     var liElem = document.createElement('li');
     liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views, ${(((allProducts[i].click / allProducts[i].views) * 100).toFixed(2))}%`;
     numberOfClicks.appendChild(liElem);
     gotClicks[i] = allProducts[i].click;
-    localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
+    gotViews[i] = allProducts[i].views;
+    percentage[i]= (((allProducts[i].click / allProducts[i].views).toFixed(2)));
+    
+    // localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
   }
-}
-var gotClicks = [];
+  console.log('gotclicks', gotClicks);
+  localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
+  localStorage.setItem('gotViews', JSON.stringify(gotViews));
+  localStorage.setItem('percentage', JSON.stringify(percentage));
 
+  // checkLocalStorage();
+}
+
+
+var percentage = [];
+var gotViews = [];
+var gotClicks = [];
+// localStorage.setItem('gotClicksvar', JSON.stringify(gotClicks));
+// console.log('gotclicks', gotClicks);
+// console.log('allproducts', allProducts);
 
 var ctx = document.getElementById('myChart').getContext('2d');
 
 function showChart () {
 
+  var data = {
+    labels: titles,
+    datasets: [{
+      label: 'Clicks',
+      backgroundColor: 'rgba(0, 99, 132, 0.6',
+      borderWidth: 1,
+      data: gotClicks,
+    }]
+  };
   var myChart = new Chart(ctx, {
     type: 'bar',
-    data: {
-      labels: titles,
-      datasets: [{
-        label: '# of Votes',
-        data: gotClicks,
-        backgroundColor: 'black',
-        borderColor: 'white',
-        borderWidth: 3
-      }]
-    },
-    options: {
-      legend: {
-        labels: {
-          fontColor: 'white'
-        }
-      },
-      title: {
-        display: true,
-        fontColor: 'white',
-        text: 'Your Vote Results',
-        fontSize: 60
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
-            fontSize: 20,
-            fontColor: 'Black'
-          }
-        }],
-        xAxes: [{
-          ticks: {
-            fontSize: 20,
-            fontColor: 'Black'
-          }
-        }]
-      }
-    }
+    data: data,
   });
+  
+  var viewsData = {
+    label: 'Views',
+    data: gotViews,
+    backgroundColor: 'rgba(0, 99, 132, 0.6',
+    borderWidth: 1,
+  };
+  data.datasets.push(viewsData);
+  myChart.update();
+
+  var percentageData = {
+    label: 'Percentage',
+    data: percentage,
+    backgroundColor: 'rgba(0, 99, 132, 0.6',
+    borderWidth: 1,
+  
+  };
+  data.datasets.push(percentageData);
+  myChart.update();
+  
+
 }
 
 function checkLocalStorage () {
-  if (gotClicks.length > 0) {
-    var retrieve = localStorage.getItem('gotClicks');
-    gotClicks = JSON.parse(retrieve);
-    
-    showChart();
-  }else {
+  var retrieve = localStorage.getItem('gotClicks');
+  var retrieveParse = JSON.parse(retrieve);
+  
+  if (retrieveParse === null) {
+    console.log('retrieveParse', retrieveParse);
     displayProduct();
+  }else {
+    bye.remove();
+    showChart();
   }
-  console.log('gotClicks', gotClicks);
 }
-// checkLocalStorage();
- displayProduct();
 
+//  displayProduct();
+checkLocalStorage();
