@@ -11,7 +11,7 @@ var titles = [];
 var counter = document.getElementById('counter');
 var bye = document.getElementById('bye');
 
-debugger;
+// debugger;
 function BusMall(name, ext) {
   this.name = name;
   this.path = `img/${name}.${ext}`;
@@ -76,47 +76,54 @@ function displayProduct() {
     imgElement[i].id = allProducts[currentImage[i]].name;
     allProducts[currentImage[i]].views += 1;
     viewedImage[i] = currentImage[i];
+    
   }
-  // console.log(viewedImage);
+  console.log('currentimage', currentImage);
+  console.log('viewedimage', viewedImage);
 }
 
 sectionTag.addEventListener('click', handleClick);
 
 function handleClick(event) {
+  // debugger;
   // console.log(totalClicks, 'total clicks');
   if(totalClicks >= 24) {
     sectionTag.removeEventListener('click', handleClick);
     bye.remove();
     showClicks();
     showChart();
-    // checkLocalStorage();
   }
   totalClicks ++;
+  console.log('totalclicks', totalClicks);
   counter.textContent = `You have voted ${totalClicks} times.`;
   for(var i = 0; i < allProducts.length; i++) {
     if(event.target.id === allProducts[i].name) {
       allProducts[i].click += 1;
       console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
-      console.log(allProducts);
-      console.log(gotClicks);
     }
   }
+  console.log('allproducts', allProducts);
   displayProduct();
 }
 
 function showClicks() {
   for(var i = 0; i < allProducts.length; i++) {
+    if(event.target.id === allProducts[i].name) {
+      allProducts[i].click += 1;
+      console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
+    }
     var liElem = document.createElement('li');
     liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views, ${(((allProducts[i].click / allProducts[i].views) * 100).toFixed(2))}%`;
     numberOfClicks.appendChild(liElem);
     gotClicks[i] = allProducts[i].click;
+    console.log('gotclicks', gotClicks);
     // localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
   }
 }
 var gotClicks = [];
-localStorage.setItem('gotClicksvar', JSON.stringify(gotClicks));
-console.log('gotclicks', gotClicks);
-console.log('allproducts', allProducts);
+// localStorage.setItem('gotClicksvar', JSON.stringify(gotClicks));
+// console.log('gotclicks', gotClicks);
+// console.log('allproducts', allProducts);
 
 var ctx = document.getElementById('myChart').getContext('2d');
 
