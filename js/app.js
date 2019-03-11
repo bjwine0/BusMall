@@ -136,7 +136,7 @@ function showClicks() {
 var percentage = [];
 var gotViews = [];
 var gotClicks = [];
-// localStorage.setItem('gotClicksvar', JSON.stringify(gotClicks));
+
 // console.log('gotclicks', gotClicks);
 // console.log('allproducts', allProducts);
 
@@ -148,7 +148,7 @@ function showChart () {
     labels: titles,
     datasets: [{
       label: 'Clicks',
-      backgroundColor: 'rgba(0, 99, 132, 0.6',
+      backgroundColor: '#070D59',
       borderWidth: 1,
       data: gotClicks,
     }]
@@ -161,7 +161,7 @@ function showChart () {
   var viewsData = {
     label: 'Views',
     data: gotViews,
-    backgroundColor: 'rgba(0, 99, 132, 0.6',
+    backgroundColor: '#FF5D9E',
     borderWidth: 1,
   };
   data.datasets.push(viewsData);
@@ -170,7 +170,7 @@ function showChart () {
   var percentageData = {
     label: 'Percentage',
     data: percentage,
-    backgroundColor: 'rgba(0, 99, 132, 0.6',
+    backgroundColor: '#F7B633',
     borderWidth: 1,
 
   };
@@ -180,16 +180,25 @@ function showChart () {
 }
 
 function checkLocalStorage () {
-  debugger;
-  var retrieve = localStorage.getItem('gotClicks');
-  var retrieveParse = JSON.parse(retrieve);
+  // debugger;
+  var retrieveClick = localStorage.getItem('gotClicks');
+  var clickParse = JSON.parse(retrieveClick);
+
+  var retrieveViews = localStorage.getItem('gotViews');
+  var viewsParse = JSON.parse(retrieveViews);
+
+  var retrievePercent = localStorage.getItem('percentage');
+  var percentParse = JSON.parse(retrievePercent);
   
-  if (retrieveParse === null) {
-    console.log('retrieveParse', retrieveParse);
+  if (clickParse === null) {
+    console.log('retrieveParse', clickParse);
     displayProduct();
   }else {
     bye.remove();
-    gotClicks = retrieveParse;
+    gotClicks = clickParse;
+    gotViews = viewsParse;
+    percentage = percentParse;
+    console.log(percentParse);
     showChart();
   }
 }
