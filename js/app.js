@@ -121,7 +121,7 @@ function showClicks() {
     gotClicks[i] = allProducts[i].click;
     gotViews[i] = allProducts[i].views;
     percentage[i]= (((allProducts[i].click / allProducts[i].views).toFixed(2)));
-    
+
     // localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
   }
   console.log('gotclicks', gotClicks);
@@ -157,7 +157,7 @@ function showChart () {
     type: 'bar',
     data: data,
   });
-  
+
   var viewsData = {
     label: 'Views',
     data: gotViews,
@@ -172,15 +172,15 @@ function showChart () {
     data: percentage,
     backgroundColor: 'rgba(0, 99, 132, 0.6',
     borderWidth: 1,
-  
+
   };
   data.datasets.push(percentageData);
   myChart.update();
-  
 
 }
 
 function checkLocalStorage () {
+  debugger;
   var retrieve = localStorage.getItem('gotClicks');
   var retrieveParse = JSON.parse(retrieve);
   
@@ -189,6 +189,7 @@ function checkLocalStorage () {
     displayProduct();
   }else {
     bye.remove();
+    gotClicks = retrieveParse;
     showChart();
   }
 }
