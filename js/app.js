@@ -81,6 +81,8 @@ function displayProduct() {
   console.log('currentimage', currentImage);
   console.log('viewedimage', viewedImage);
 }
+// displayProduct();
+
 
 sectionTag.addEventListener('click', handleClick);
 
@@ -92,6 +94,7 @@ function handleClick(event) {
     bye.remove();
     showClicks();
     showChart();
+    // checkLocalStorage();
   }
   totalClicks ++;
   console.log('totalclicks', totalClicks);
@@ -102,7 +105,7 @@ function handleClick(event) {
       console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
     }
   }
-  console.log('allproducts', allProducts);
+  // console.log('allproducts', allProducts);
   displayProduct();
 }
 
@@ -110,16 +113,28 @@ function showClicks() {
   for(var i = 0; i < allProducts.length; i++) {
     if(event.target.id === allProducts[i].name) {
       allProducts[i].click += 1;
-      console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
     }
+
     var liElem = document.createElement('li');
     liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views, ${(((allProducts[i].click / allProducts[i].views) * 100).toFixed(2))}%`;
     numberOfClicks.appendChild(liElem);
     gotClicks[i] = allProducts[i].click;
-    console.log('gotclicks', gotClicks);
+    gotViews[i] = allProducts[i].views;
+    percentage[i]= (((allProducts[i].click / allProducts[i].views).toFixed(2)));
+    
     // localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
   }
+  console.log('gotclicks', gotClicks);
+  localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
+  localStorage.setItem('gotViews', JSON.stringify(gotViews));
+  localStorage.setItem('percentage', JSON.stringify(percentage));
+
+  // checkLocalStorage();
 }
+
+
+var percentage = [];
+var gotViews = [];
 var gotClicks = [];
 // localStorage.setItem('gotClicksvar', JSON.stringify(gotClicks));
 // console.log('gotclicks', gotClicks);
@@ -129,60 +144,54 @@ var ctx = document.getElementById('myChart').getContext('2d');
 
 function showChart () {
 
+  var data = {
+    labels: titles,
+    datasets: [{
+      label: 'Clicks',
+      backgroundColor: 'rgba(0, 99, 132, 0.6',
+      borderWidth: 1,
+      data: gotClicks,
+    }]
+  };
   var myChart = new Chart(ctx, {
     type: 'bar',
-    data: {
-      labels: titles,
-      datasets: [{
-        label: '# of Votes',
-        data: gotClicks,
-        backgroundColor: 'black',
-        borderColor: 'white',
-        borderWidth: 3
-      }]
-    },
-    options: {
-      legend: {
-        labels: {
-          fontColor: 'white'
-        }
-      },
-      title: {
-        display: true,
-        fontColor: 'white',
-        text: 'Your Vote Results',
-        fontSize: 60
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
-            fontSize: 20,
-            fontColor: 'Black'
-          }
-        }],
-        xAxes: [{
-          ticks: {
-            fontSize: 20,
-            fontColor: 'Black'
-          }
-        }]
-      }
-    }
+    data: data,
   });
+  
+  var viewsData = {
+    label: 'Views',
+    data: gotViews,
+    backgroundColor: 'rgba(0, 99, 132, 0.6',
+    borderWidth: 1,
+  };
+  data.datasets.push(viewsData);
+  myChart.update();
+
+  var percentageData = {
+    label: 'Percentage',
+    data: percentage,
+    backgroundColor: 'rgba(0, 99, 132, 0.6',
+    borderWidth: 1,
+  
+  };
+  data.datasets.push(percentageData);
+  myChart.update();
+  
+
 }
 
-// function checkLocalStorage () {
-//   if (gotClicks.length > 0) {
-//     var retrieve = localStorage.getItem('gotClicks');
-//     gotClicks = JSON.parse(retrieve);
-    
-//     showChart();
-//   }else {
-//     displayProduct();
-//   }
-//   console.log('gotClicks', gotClicks);
-// }
-// checkLocalStorage();
- displayProduct();
+function checkLocalStorage () {
+  var retrieve = localStorage.getItem('gotClicks');
+  var retrieveParse = JSON.parse(retrieve);
+  
+  if (retrieveParse === null) {
+    console.log('retrieveParse', retrieveParse);
+    displayProduct();
+  }else {
+    bye.remove();
+    showChart();
+  }
+}
 
+//  displayProduct();
+checkLocalStorage();
