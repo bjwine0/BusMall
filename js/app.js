@@ -120,7 +120,7 @@ function showClicks() {
     numberOfClicks.appendChild(liElem);
     gotClicks[i] = allProducts[i].click;
     gotViews[i] = allProducts[i].views;
-    percentage[i]= (((allProducts[i].click / allProducts[i].views).toFixed(2)));
+    percentage[i]= ((allProducts[i].click / allProducts[i].views)* 100).toFixed(2);
 
     // localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
   }
@@ -147,7 +147,7 @@ function showChart () {
   var data = {
     labels: titles,
     datasets: [{
-      label: 'Clicks',
+      label: 'Votes',
       backgroundColor: '#070D59',
       borderWidth: 1,
       data: gotClicks,
@@ -156,6 +156,34 @@ function showChart () {
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: data,
+    options: {
+      legend: {
+        labels: {
+          fontColor: 'white'
+        }
+      },
+      title: {
+        display: true,
+        fontColor: 'white',
+        text: 'Your Vote Results',
+        fontSize: 60
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true,
+            fontSize: 20,
+            fontColor: 'Black'
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            fontSize: 20,
+            fontColor: 'Black'
+          }
+        }]
+      }
+    }
   });
 
   var viewsData = {
@@ -189,7 +217,7 @@ function checkLocalStorage () {
 
   var retrievePercent = localStorage.getItem('percentage');
   var percentParse = JSON.parse(retrievePercent);
-  
+
   if (clickParse === null) {
     console.log('retrieveParse', clickParse);
     displayProduct();
