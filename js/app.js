@@ -116,11 +116,11 @@ function showClicks() {
     }
 
     var liElem = document.createElement('li');
-    liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views, ${(((allProducts[i].click / allProducts[i].views) * 100).toFixed(2))}%`;
+    liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views, ${((allProducts[i].click / allProducts[i].views) * 100).toFixed(1)}%`;
     numberOfClicks.appendChild(liElem);
     gotClicks[i] = allProducts[i].click;
     gotViews[i] = allProducts[i].views;
-    percentage[i]= ((allProducts[i].click / allProducts[i].views)* 100).toFixed(2);
+    percentage[i]= ((allProducts[i].click / allProducts[i].views)* 100).toFixed(1);
 
     // localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
   }
