@@ -11,7 +11,7 @@ var titles = [];
 var counter = document.getElementById('counter');
 var bye = document.getElementById('bye');
 
-
+debugger;
 function BusMall(name, ext) {
   this.name = name;
   this.path = `img/${name}.${ext}`;
@@ -88,17 +88,17 @@ function handleClick(event) {
     sectionTag.removeEventListener('click', handleClick);
     bye.remove();
     showClicks();
-    // showChart();
-    checkLocalStorage();
+    showChart();
+    // checkLocalStorage();
   }
-  totalClicks += 1;
+  totalClicks ++;
   counter.textContent = `You have voted ${totalClicks} times.`;
   for(var i = 0; i < allProducts.length; i++) {
     if(event.target.id === allProducts[i].name) {
       allProducts[i].click += 1;
-      // console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
-      // // console.log(allProducts);
-      // console.log(gotClicks);
+      console.log(`${event.target.id} has ${allProducts[i].click} clicks and ${allProducts[i].views} views`);
+      console.log(allProducts);
+      console.log(gotClicks);
     }
   }
   displayProduct();
@@ -110,11 +110,13 @@ function showClicks() {
     liElem.textContent = `${allProducts[i].name}: ${allProducts[i].click} clicks, ${allProducts[i].views} views, ${(((allProducts[i].click / allProducts[i].views) * 100).toFixed(2))}%`;
     numberOfClicks.appendChild(liElem);
     gotClicks[i] = allProducts[i].click;
-    localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
+    // localStorage.setItem('gotClicks', JSON.stringify(gotClicks));
   }
 }
 var gotClicks = [];
-
+localStorage.setItem('gotClicksvar', JSON.stringify(gotClicks));
+console.log('gotclicks', gotClicks);
+console.log('allproducts', allProducts);
 
 var ctx = document.getElementById('myChart').getContext('2d');
 
@@ -163,17 +165,17 @@ function showChart () {
   });
 }
 
-function checkLocalStorage () {
-  if (gotClicks.length > 0) {
-    var retrieve = localStorage.getItem('gotClicks');
-    gotClicks = JSON.parse(retrieve);
+// function checkLocalStorage () {
+//   if (gotClicks.length > 0) {
+//     var retrieve = localStorage.getItem('gotClicks');
+//     gotClicks = JSON.parse(retrieve);
     
-    showChart();
-  }else {
-    displayProduct();
-  }
-  console.log('gotClicks', gotClicks);
-}
+//     showChart();
+//   }else {
+//     displayProduct();
+//   }
+//   console.log('gotClicks', gotClicks);
+// }
 // checkLocalStorage();
  displayProduct();
 
